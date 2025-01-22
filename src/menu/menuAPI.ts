@@ -1,13 +1,13 @@
 import { createAsyncThunk} from '@reduxjs/toolkit';
-import { MENU_DETAILS_END_POINT } from '../api_endpoints/constants';
-import { MENU_FETCH, FAILED_TO_FECTH_MENU, SUCCESS_REQUEST_STATUS } from './constants';
+import { MENU_DETAILS_ENDPOINT } from '../apiEndpoints/constants';
+import { FETCH_MENU, FAILED_TO_FECTH_MENU, SUCCESS_REQUEST_STATUS } from './constants';
 import { menu } from './types';
 
 const fetchMenu = createAsyncThunk<menu, string>(
-    MENU_FETCH,
+    FETCH_MENU,
     async ({ rejectWithValue }: any) => {
       try {
-        const response = await fetch(MENU_DETAILS_END_POINT);
+        const response = await fetch(MENU_DETAILS_ENDPOINT);
         if (response.status !== SUCCESS_REQUEST_STATUS) {
           throw new Error(FAILED_TO_FECTH_MENU);
         }

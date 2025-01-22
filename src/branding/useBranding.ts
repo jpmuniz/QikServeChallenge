@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchBranding } from './brandingAPI';
 import { useEffect } from 'react';
 
-export function useBranding(brandId: string) {
+const useBranding = (brandId: string) => {
   const dispatch = useAppDispatch();
   const { currentBrand, loading, error } = useAppSelector((state) => state.branding);
 
@@ -14,3 +14,5 @@ export function useBranding(brandId: string) {
 
   return { brand: currentBrand, loading, error };
 }
+
+export { useBranding }

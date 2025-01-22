@@ -7,8 +7,7 @@ import './App.css'
 const App = () =>  {
   const { brand, loading } = useBranding("9");
   const theme = createTheme(brand);
-  const { menu } = useMenu()
-  console.log(menu)
+  useMenu();
   return (
     <ThemeProvider theme={theme}>
       {!loading && 

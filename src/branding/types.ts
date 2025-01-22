@@ -8,7 +8,7 @@ type webSettings = {
     navBackgroundColour: string
 }
 
-type Branding = {
+type branding = {
     id: string,
     name: string,
     internalName: string,
@@ -31,12 +31,12 @@ type Branding = {
     currency: string
  }
   
-type BrandingState = {
-    currentBrand: Branding | null;
+type brandingType = {
+    currentBrand: branding | null;
     loading: boolean;
     error: string | null;
 }
   
 
 
-export type { Branding, BrandingState }  
+export type { branding, brandingType }  

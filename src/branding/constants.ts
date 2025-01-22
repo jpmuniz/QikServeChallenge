@@ -1,14 +1,14 @@
-import { BrandingState } from './types';
+import { brandingType } from './types';
 
-const INITIAL_STATE: BrandingState = {
+const INITIAL_STATE: brandingType = {
     currentBrand: null,
     loading: false,
     error: null,
   };
-
+  
 const SUCCESS_REQUEST_STATUS = 200;  
-const BRANDING_FETCH_BRANDING = 'branding/fetchBranding';
-const FAILED_TO_FECTH_BRAND = 'Failed to fetch brand';
+const FETCH_BY_BRANDING_ID = 'branding/fetchByBrandingId';
+const FAILED_TO_FECTH_BRANDING = 'Failed to fetch brand';
 const BRANDING = 'branding';
   
-export { INITIAL_STATE, BRANDING_FETCH_BRANDING, FAILED_TO_FECTH_BRAND, BRANDING, SUCCESS_REQUEST_STATUS }
+export { INITIAL_STATE, FETCH_BY_BRANDING_ID, FAILED_TO_FECTH_BRANDING, BRANDING, SUCCESS_REQUEST_STATUS }

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { INITIAL_STATE as initialState, BRANDING} from './constants';
-import { Branding } from './types';
+import { branding } from './types';
 import { fetchBranding } from './brandingAPI';
 
 
@@ -14,7 +14,7 @@ const brandingSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchBranding.fulfilled, (state, action: PayloadAction<Branding>) => {
+      .addCase(fetchBranding.fulfilled, (state, action: PayloadAction<branding>) => {
         state.loading = false;
         state.currentBrand = action.payload;
       })

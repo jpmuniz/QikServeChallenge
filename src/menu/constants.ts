@@ -7,8 +7,8 @@ const INITIAL_STATE: menuType = {
   };
 
 const SUCCESS_REQUEST_STATUS = 200;  
-const MENU_FETCH = 'menu/fetchMenu';
+const FETCH_MENU = 'menu/fetchMenu';
 const FAILED_TO_FECTH_MENU = 'Some thing wrong happen, sorry we cant show menu';
 const MENU = 'menu';
   
-export { INITIAL_STATE, MENU_FETCH, FAILED_TO_FECTH_MENU, MENU, SUCCESS_REQUEST_STATUS }
+export { INITIAL_STATE, FETCH_MENU, FAILED_TO_FECTH_MENU, MENU, SUCCESS_REQUEST_STATUS }
