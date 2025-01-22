@@ -1,12 +1,14 @@
-
+import { useBranding } from './branding/useBranding';
 import './App.css'
 
-const App = () =>  (
-  <p>
-    Qik Serve Aplication
-  </p>
-    
-)
+const App = () =>  {
+  useBranding("9");
+  return (
+      <p>
+        Qik Serve Aplication
+      </p>
+  )
+}
 
 
 export default App
