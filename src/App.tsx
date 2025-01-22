@@ -1,12 +1,20 @@
 import { useBranding } from './branding/useBranding';
+import { ThemeProvider } from 'styled-components';
+import { createTheme } from './theme/createTheme';
 import './App.css'
 
 const App = () =>  {
-  useBranding("9");
+  const { brand, loading } = useBranding("9");
+  const theme = createTheme(brand);
+
   return (
+    <ThemeProvider theme={theme}>
+      {!loading && 
       <p>
-        Qik Serve Aplication
-      </p>
+        Qik Serve Aplicatio {theme.name}
+      </p>}
+  </ThemeProvider>
+
   )
 }
 

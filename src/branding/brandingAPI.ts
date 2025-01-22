@@ -8,7 +8,6 @@ const fetchBranding = createAsyncThunk<Branding, string>(
     async (brandId, { rejectWithValue }) => {
       try {
         const response = await fetch(`${RESTAURANT_DETAILS_END_POINT}${brandId}`);
-        console.log(response.status )
         if (response.status !== SUCCESS_REQUEST_STATUS) {
           throw new Error(FAILED_TO_FECTH_BRAND);
         }
