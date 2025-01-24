@@ -18,6 +18,14 @@ type menu = {
     ]
 }
 
+type sectionsMenuType = {
+    sections:[
+        burgers,
+        drinks,
+        desserts
+    ]
+}
+
 type menuType = {
     menu: menu | null,
     loading: boolean,
@@ -29,4 +37,4 @@ type errorDataMenu = {
 }
 
 
- export type { menuType, menu, errorDataMenu, AvailabilityType }
+ export type { menuType, menu, errorDataMenu, AvailabilityType, sectionsMenuType }

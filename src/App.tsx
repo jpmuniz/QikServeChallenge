@@ -1,20 +1,18 @@
 import { useBranding } from './branding/useBranding';
-import { useMenu } from './menu/useMenu';
 import { ThemeProvider } from 'styled-components';
 import { createTheme } from './theme/createTheme';
-import './App.css'
+import { Index } from './components/index';
 
 const App = () =>  {
   const { brand, loading } = useBranding("9");
   const theme = createTheme(brand);
-  useMenu();
+  
   return (
     <ThemeProvider theme={theme}>
       {!loading && 
-      <p>
-        Qik Serve Aplicatio {theme.name}
-      </p>}
-  </ThemeProvider>
+        <Index />
+      }
+    </ThemeProvider>
 
   )
 }
