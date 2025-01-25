@@ -30,4 +30,4 @@ const formatPrice = (value: number, locale: string = "pt-BR", currency: string =
     }).format(value);
 };
 
-export { getSectionsMenuItems, getItemsMenu, applyEllipsis, formatPrice, orderByName }
+export { getSectionsMenuItems, getItemsMenu, applyEllipsis, formatPrice }
