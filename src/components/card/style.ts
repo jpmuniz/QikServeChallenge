@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { contentProps } from './types';
 
 const Container = styled.ul`
     width: 393px;
