@@ -14,11 +14,9 @@ const Index =()=> {
     const [itemSelected, setItemSelected] = useState<item>(null);
     const sectionsMenu = getSectionsMenuItems(menu);
     const itemsMenu = getItemsMenu(menu);
-
     const handleClick = (item: item) => setItemSelected(item);
     const removeItemSelected =()=> {
         setItemSelected(null);
-        console.log('ItemSelected', itemSelected);
     }
 
     return (

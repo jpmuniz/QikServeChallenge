@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Modifiers } from './itemModifiersData';
 import { ItemImage } from './itemImage';
-import { ItemWithOutImage } from './itemWithOutImage'
-import { Button } from '../button/index'
+import { ItemWithOutImage } from './itemWithOutImage';
+import { CountButton } from '../countButton/index';
+import { Button } from '../button/index';
+import { FaMinus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import { formatPrice } from '../utils';
 import { itemProps, itemModifiresProps ,AvailabilityType } from './types';
-import { Container, ContainerAddOrder } from './style';
+import { Container, ContainerAddOrder, ContainerCountButton, Counter } from './style';
 
 
 const ItemPage = ({ item, removeItemSelected }: itemProps) => {
     const [itemSelected, setItemSelected] = useState<itemModifiresProps | null>()
     const [priceOrder, setAddPriceOrder] = useState<string>("");
+    const [count, setCount] = useState<number>(0)
     const HAS_MODIFIERS_DATA = !!item?.modifiers?.[0]?.items.length;
     const HAS_IMAGE = !!item?.images?.[0]?.image && !HAS_MODIFIERS_DATA;
     const NO_IMAGE_NO_MODIFIERS_DATA = !HAS_IMAGE && !HAS_MODIFIERS_DATA;
@@ -35,11 +39,17 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
 
     const handleClickAddOrder = () => 
         setAddPriceOrder(()=> formatPrice(itemSelected?.price ?? 0));
-    
+
+    const removeCounter =()=> {
+        if(count > 0){
+            setCount(c => c - 1);
+        }
+    }
 
     useEffect(()=>{
         if(itemSelected === null){
             setAddPriceOrder("");
+            setCount(0)
         }
     },[itemSelected])
 
@@ -56,6 +66,21 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
             }             
             
             <ContainerAddOrder>
+                <ContainerCountButton>
+                    <CountButton 
+                        backgroundColor='#DADADA'
+                        color='#5f5f5f'
+                        onClick={removeCounter}
+                        Icon={FaMinus}
+                    />
+                    <Counter>{count}</Counter>
+                    <CountButton 
+                        backgroundColor='#4f372F'
+                        color='#ffffff'
+                        onClick={()=> !!itemSelected && setCount(c => c + 1)}
+                        Icon={FaPlus}
+                    />
+                </ContainerCountButton>
                 <Button     
                     text={`${ADD_ORDER_LABEL} ${priceOrder}`} 
                     onClick={handleClickAddOrder} 

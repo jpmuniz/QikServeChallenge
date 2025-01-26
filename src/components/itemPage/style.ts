@@ -134,13 +134,31 @@ const ListOptionsSizeDescription = styled.div`
 `;
 
 const ContainerAddOrder = styled.div`
-  width: 100%;
-  text-align: center;
-  padding: 24px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: #F8F9FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 24px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #F8F9FA;
+`;
+
+const ContainerCountButton  = styled.div`
+    width: 143px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+`;
+
+const Counter = styled.strong`
+    font-size: 24px;
+    font-weight: 600;
 `;
 
 
@@ -159,5 +177,7 @@ export {
     CloseItem,
     ImageWrapper,
     ContainerOptionSize,
-    CloseItemDefault
+    CloseItemDefault,
+    ContainerCountButton,
+    Counter
 }
