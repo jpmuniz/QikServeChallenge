@@ -6,6 +6,7 @@ import { Index } from './components/index';
 const App = () =>  {
   const { brand, loading } = useBranding("9");
   const theme = createTheme(brand);
+  console.log("brand", brand);
   
   return (
     <ThemeProvider theme={theme}>

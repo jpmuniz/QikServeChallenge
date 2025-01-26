@@ -4,7 +4,8 @@ import { applyEllipsis, formatPrice } from '../utils';
 import { listItemProps,  AvailabilityType} from './types';
 import { Container, Content, Item, Description, Image, Header, HeaderContainer } from './style';
 
-const ListItem = ({ listProps }: listItemProps) => {
+const ListItem = ({ listProps, handleClickSelectItem }: listItemProps) => {
+
     const [isItemVisible, setItemVisible] = useState<boolean>(true);
 
     const handleClickArrowIcon = () => setItemVisible(!isItemVisible);   
@@ -19,7 +20,7 @@ const ListItem = ({ listProps }: listItemProps) => {
     const showListItem = () => (
         listProps.items?.map(item => (
             item.availabilityType === AvailabilityType.AVAILABLE_NOW ?
-                <Item key={item.name} $isVisible={isItemVisible}>
+                <Item key={item.name} $isVisible={isItemVisible} onClick={()=> handleClickSelectItem(item)}>
                     <Description>
                         <h3><b>{item.name}</b></h3>
                         <p>{applyEllipsis(item?.description, 60)}</p>

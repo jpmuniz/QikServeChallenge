@@ -1,4 +1,5 @@
 import { menu } from '../menu/types';
+import { itemModifiresProps } from './itemPage/types';
 
 const getSectionsMenuItems = (menu: menu | null) => (
       menu?.sections.map(section => (
@@ -30,4 +31,20 @@ const formatPrice = (value: number, locale: string = "pt-BR", currency: string =
     }).format(value);
 };
 
-export { getSectionsMenuItems, getItemsMenu, applyEllipsis, formatPrice }
+const fomartArrayItemsModifiers = (modifiers: itemModifiresProps[]) => (
+    modifiers.map(data => (
+        {
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            maxChoices: data.maxChoices,
+            position: data.position,
+            visible: data.visible,
+            availabilityType: data.availabilityType,
+            isCheckedRadioInput: false,
+            available: data.available,
+        }
+    ))
+);
+
+export { getSectionsMenuItems, getItemsMenu, applyEllipsis, formatPrice, fomartArrayItemsModifiers }
