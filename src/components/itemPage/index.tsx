@@ -19,6 +19,8 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
     const HAS_IMAGE = !!item?.images?.[0]?.image && !HAS_MODIFIERS_DATA;
     const NO_IMAGE_NO_MODIFIERS_DATA = !HAS_IMAGE && !HAS_MODIFIERS_DATA;
     const ADD_ORDER_LABEL = "Add to order "; 
+    const MINIMUM_NUMBER = 0;
+    const IS_ITEM_SELECTED = !!itemSelected;
 
     const newItem = {
         id: item?.id ?? 0,
@@ -41,11 +43,17 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
         setAddPriceOrder(()=> formatPrice(itemSelected?.price ?? 0));
 
     const removeCounter =()=> {
-        if(count > 0){
-            setCount(c => c - 1);
+        if(count > MINIMUM_NUMBER){
+            setCount(count => count - 1);
         }
     }
 
+    const addCounter =()=> {
+        if(IS_ITEM_SELECTED && itemSelected?.available){
+            setCount(count => count + 1);
+        }
+    }
+    
     useEffect(()=>{
         if(itemSelected === null){
             setAddPriceOrder("");
@@ -77,7 +85,7 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
                     <CountButton 
                         backgroundColor='#4f372F'
                         color='#ffffff'
-                        onClick={()=> !!itemSelected && setCount(c => c + 1)}
+                        onClick={addCounter}
                         Icon={FaPlus}
                     />
                 </ContainerCountButton>
