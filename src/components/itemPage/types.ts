@@ -7,16 +7,26 @@ type image = {
     image: string
 }
 
-type itemModifiresProps = {
-    id: string;
+type itemSelectedProps = {
+    id: number;
     name: string;
     price: number;
     maxChoices?: number;
     position: number;
     visible: number;
     availabilityType: AvailabilityType;
-    isCheckedRadioInput: boolean;
-    available: boolean;
+    isCheckedRadioInput?: boolean;
+    available?: boolean;
+    description?: string;
+    alcoholic?: number;
+    sku?: string;
+    images?: [
+        image
+    ]
+}
+
+type generateConstantProps = {
+    item : itemSelectedProps
 }
 
 type item = {
@@ -34,7 +44,8 @@ type item = {
     ]
 }
 
-type itemImageProps = {
+type itemsProps = {
+    hasImage?: boolean;
     removeItemSelected: ()=> void;
     setItemSelected?: (item: item | null)=> void;
     item : item
@@ -42,7 +53,7 @@ type itemImageProps = {
 
 type itemProps = {
     removeItemSelected: ()=> void;
-    setItemSelected?: (item: itemModifiresProps | null)=> void;
+    setItemSelected?: (item: itemSelectedProps | null)=> void;
         item?: {
             id: number,
             name: string,
@@ -64,7 +75,7 @@ type itemProps = {
                     maxChoices: number,
                     items: [
                        {
-                          id: string,
+                          id: number,
                           name: string,
                           price: number,
                           maxChoices: number,
@@ -81,6 +92,6 @@ type itemProps = {
         }   
 }
 
-export type { itemProps, itemModifiresProps, itemImageProps }
+export type { itemProps, itemSelectedProps, itemsProps, generateConstantProps }
 
 export { AvailabilityType }

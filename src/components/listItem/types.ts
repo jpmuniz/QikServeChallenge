@@ -31,19 +31,40 @@ type listItemProps = {
     listProps : {
         name: string,
         items : {
-                id: number,
-                name: string,
-                description: string,
-                alcoholic: number,
-                price: number,
-                position: number,
-                visible: number,
-                availabilityType: AvailabilityType,
-                sku: string,
-                images? :[
-                    image
-                ],
-                available: boolean   
+            id: number,
+            name: string,
+            description: string,
+            alcoholic: number,
+            price: number,
+            position: number,
+            visible: number,
+            availabilityType: AvailabilityType,
+            sku: string,
+            images? :[
+                image
+            ],
+            modifiers?: [
+                {
+                    id: number,
+                    name: string,
+                    minChoices: number,
+                    maxChoices: number,
+                    items: [
+                       {
+                          id: number,
+                          name: string,
+                          price: number,
+                          maxChoices: number,
+                          position: number,
+                          visible: number,
+                          isCheckedRadioInput: boolean,
+                          availabilityType: AvailabilityType,
+                          available: boolean
+                       }
+                    ]
+                 }
+              ],
+            available: boolean
         }[] | undefined
     }
 }

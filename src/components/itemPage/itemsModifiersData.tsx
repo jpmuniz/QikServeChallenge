@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
+import { AppDispatch } from '../../redux/store';
+import { removeOrder } from "../../order/orderSlice";
 import { formatPrice, fomartArrayItemsModifiers } from '../utils';
-import { itemProps, itemModifiresProps } from './types';
+import { itemProps, itemSelectedProps } from './types';
 import { Description, 
          Image, 
          ItemDescription, 
@@ -13,20 +16,30 @@ import { Description,
          ImageWrapper
 } from './style';
 
-const Modifiers = ({ item, removeItemSelected, setItemSelected }: itemProps) => {
-    const [itemsModifires, setItemsModifires] = useState<itemModifiresProps[]>()
+const ModifiersItems = ({ item, removeItemSelected, setItemSelected }: itemProps) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const [itemsModifires, setItemsModifires] = useState<itemSelectedProps[]>()
 
-    const handleClickSelectItem = (item: itemModifiresProps) => {
+    const removeItemFromOrder = (item: itemSelectedProps) => {
+        item.isCheckedRadioInput = false;
+        dispatch(removeOrder(item.id));
+        setItemSelected?.(null);
+        return item;
+    }
+
+    const inputRadioWasChecked = (item: itemSelectedProps) =>{
+        item.isCheckedRadioInput = true;
+        setItemSelected?.(item);
+    }
+
+    const handleClickSelectItem = (item: itemSelectedProps) => {
           const response = itemsModifires?.map(data => {
             if(data.id === item.id && data.isCheckedRadioInput){
-                data.isCheckedRadioInput = false;
-                setItemSelected?.(null);
-                return data;
+                return removeItemFromOrder(data);
             }
             data.isCheckedRadioInput = false;
             if(data.id === item.id){
-                data.isCheckedRadioInput = true;
-                setItemSelected?.(data);
+                inputRadioWasChecked(data)
             }
             return data;
           })
@@ -62,8 +75,8 @@ const Modifiers = ({ item, removeItemSelected, setItemSelected }: itemProps) => 
                             </ListOptionsSizeDescription>
                             <RadioInput 
                                 type='radio' 
-                                onClick={()=> handleClickSelectItem(item)} 
                                 checked={item.isCheckedRadioInput}
+                                onClick={()=> handleClickSelectItem(item)}
                             />
                         </ListOptionsSize>
                     ))
@@ -73,4 +86,4 @@ const Modifiers = ({ item, removeItemSelected, setItemSelected }: itemProps) => 
     ) 
 }
 
-export { Modifiers }
+export { ModifiersItems }

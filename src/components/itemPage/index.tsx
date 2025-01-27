@@ -1,23 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Modifiers } from './itemModifiersData';
-import { ItemImage } from './itemImage';
-import { ItemWithOutImage } from './itemWithOutImage';
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { setOrder } from "../../order/orderSlice";
+import { ModifiersItems } from './itemsModifiersData';
+import { Items} from './items';
 import { CountButton } from '../countButton/index';
 import { Button } from '../button/index';
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { formatPrice } from '../utils';
-import { itemProps, itemModifiresProps ,AvailabilityType } from './types';
+import { itemProps, itemSelectedProps, AvailabilityType } from './types';
 import { Container, ContainerAddOrder, ContainerCountButton, Counter } from './style';
 
 
 const ItemPage = ({ item, removeItemSelected }: itemProps) => {
-    const [itemSelected, setItemSelected] = useState<itemModifiresProps | null>()
+    const dispatch = useDispatch<AppDispatch>();
+    const [itemSelected, setItemSelected] = useState<itemSelectedProps | null>()
     const [priceOrder, setAddPriceOrder] = useState<string>("");
     const [count, setCount] = useState<number>(0)
     const HAS_MODIFIERS_DATA = !!item?.modifiers?.[0]?.items.length;
     const HAS_IMAGE = !!item?.images?.[0]?.image && !HAS_MODIFIERS_DATA;
-    const NO_IMAGE_NO_MODIFIERS_DATA = !HAS_IMAGE && !HAS_MODIFIERS_DATA;
     const ADD_ORDER_LABEL = "Add to order "; 
     const MINIMUM_NUMBER = 0;
     const IS_ITEM_SELECTED = !!itemSelected;
@@ -37,11 +39,14 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
         price: item?.price ?? 0,
         sku: item?.sku ?? "",
         visible: item?.visible ?? 0
-    }
+    }    
 
-    const handleClickAddOrder = () => 
+    const handleClickAddOrder = () => {
+        if(count > MINIMUM_NUMBER)
         setAddPriceOrder(()=> formatPrice(itemSelected?.price ?? 0));
-
+        addOrder();
+    }
+        
     const removeCounter =()=> {
         if(count > MINIMUM_NUMBER){
             setCount(count => count - 1);
@@ -53,25 +58,32 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
             setCount(count => count + 1);
         }
     }
-    
+
+    const addOrder = () => {
+        dispatch(
+          setOrder({
+            id: itemSelected?.id ?? 0,
+            name: itemSelected?.name ?? "",
+            totalValue: itemSelected?.price ?? 0,
+            amount: count      
+          })
+        );
+      };
+
     useEffect(()=>{
         if(itemSelected === null){
             setAddPriceOrder("");
-            setCount(0)
+            setCount(0);
         }
     },[itemSelected])
 
     return (
         <Container>
-            {HAS_MODIFIERS_DATA &&
-                <Modifiers item={item} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
-            }
-            {HAS_IMAGE &&
-                <ItemImage item={newItem} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
-            }
-            {NO_IMAGE_NO_MODIFIERS_DATA &&
-                <ItemWithOutImage item={newItem} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
-            }             
+            {HAS_MODIFIERS_DATA ?
+                <ModifiersItems item={item} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
+            :
+                <Items item={newItem} hasImage={HAS_IMAGE} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
+            }           
             
             <ContainerAddOrder>
                 <ContainerCountButton>

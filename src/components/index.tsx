@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { useMenu } from '../menu/useMenu';
 import { Header } from './header/index';
 import { InputSearch } from './inputSearch/index';
@@ -18,7 +20,7 @@ const Index =()=> {
     const removeItemSelected =()=> {
         setItemSelected(null);
     }
-
+    useSelector((state: RootState) => state.order.orders);
     return (
         <>
             {!itemSelected ? 

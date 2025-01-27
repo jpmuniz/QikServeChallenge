@@ -5,7 +5,6 @@ import { listItemProps,  AvailabilityType} from './types';
 import { Container, Content, Item, Description, Image, Header, HeaderContainer } from './style';
 
 const ListItem = ({ listProps, handleClickSelectItem }: listItemProps) => {
-
     const [isItemVisible, setItemVisible] = useState<boolean>(true);
 
     const handleClickArrowIcon = () => setItemVisible(!isItemVisible);   
