@@ -3,6 +3,7 @@ import { useMenu } from '../menu/useMenu';
 import { Header } from './header/index';
 import { InputSearch } from './inputSearch/index';
 import { Carousell } from './carousell/index';
+import { List } from './list/index';
 import { ListItem } from './listItem';
 import { ItemPage } from './itemPage';
 import { Footer } from './footer';
@@ -18,6 +19,7 @@ const Index =()=> {
     const removeItemSelected =()=> {
         setItemSelected(null);
     }
+    console.log("menu", menu);
     return (
         <>
             {!itemSelected ? 
@@ -25,11 +27,7 @@ const Index =()=> {
                 <Header />
                 <InputSearch />
                 <Carousell sectionsMenu={sectionsMenu} />
-                {
-                    itemsMenu?.map(item =>(
-                        <ListItem key={item.name} listProps={item} handleClickSelectItem={handleClick}/>
-                    ))
-                }
+                <List listProps={itemsMenu} handleClickSelectItem={handleClick}/>
                 <Footer />   
             </>         
             :
