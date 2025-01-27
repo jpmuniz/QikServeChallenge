@@ -24,7 +24,7 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
     const MINIMUM_NUMBER = 0;
     const IS_ITEM_SELECTED = !!itemSelected;
 
-    const newItem = {
+    const itemFormated= {
         id: item?.id ?? 0,
         alcoholic: item?.alcoholic ?? 0,
         availabilityType: item?.availabilityType ?? AvailabilityType.AVAILABLE_NOW, 
@@ -43,7 +43,7 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
 
     const handleClickAddOrder = () => {
         if(count > MINIMUM_NUMBER)
-        setAddPriceOrder(()=> formatPrice(itemSelected?.price ?? 0));
+        setAddPriceOrder(()=> formatPrice(itemSelected ? itemSelected.price * count: 0))
         addOrder();
     }
         
@@ -82,7 +82,7 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
             {HAS_MODIFIERS_DATA ?
                 <ModifiersItems item={item} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
             :
-                <Items item={newItem} hasImage={HAS_IMAGE} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
+                <Items item={itemFormated} hasImage={HAS_IMAGE} removeItemSelected={removeItemSelected} setItemSelected={setItemSelected}/>
             }           
             
             <ContainerAddOrder>
