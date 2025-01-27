@@ -1,5 +1,5 @@
 import { menu } from '../menu/types';
-import { itemModifiresProps } from './itemPage/types';
+import { itemSelectedProps } from './itemPage/types';
 
 const getSectionsMenuItems = (menu: menu | null) => (
       menu?.sections.map(section => (
@@ -15,7 +15,7 @@ const getItemsMenu = (menu: menu | null) => (
     menu?.sections.map(item => (
         {
             name: item.name,
-            items: item.items
+            items: item.items, 
         }
     ))
 );
@@ -31,7 +31,7 @@ const formatPrice = (value: number, locale: string = "pt-BR", currency: string =
     }).format(value);
 };
 
-const fomartArrayItemsModifiers = (modifiers: itemModifiresProps[]) => (
+const fomartArrayItemsModifiers = (modifiers: itemSelectedProps[]) => (
     modifiers.map(data => (
         {
             id: data.id,

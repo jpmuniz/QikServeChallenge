@@ -42,35 +42,32 @@ const ItemPage = ({ item, removeItemSelected }: itemProps) => {
     }    
 
     const handleClickAddOrder = () => {
+        const totalValue = itemSelected ? itemSelected.price * count: 0
         if(count > MINIMUM_NUMBER)
-        setAddPriceOrder(()=> formatPrice(itemSelected ? itemSelected.price * count: 0))
-        addOrder();
+        setAddPriceOrder(()=> formatPrice(totalValue))
+        dispatch(
+            setOrder({
+              id: item?.id ?? 0,
+              name: itemSelected?.name ?? "",
+              totalValue,
+              amount: count      
+            })
+        );
     }
         
-    const removeCounter =()=> {
+    const removeCounter = () => {
         if(count > MINIMUM_NUMBER){
             setCount(count => count - 1);
         }
     }
 
-    const addCounter =()=> {
+    const addCounter = () => {
         if(IS_ITEM_SELECTED && itemSelected?.available){
             setCount(count => count + 1);
         }
     }
 
-    const addOrder = () => {
-        dispatch(
-          setOrder({
-            id: itemSelected?.id ?? 0,
-            name: itemSelected?.name ?? "",
-            totalValue: itemSelected?.price ?? 0,
-            amount: count      
-          })
-        );
-      };
-
-    useEffect(()=>{
+    useEffect(() =>{
         if(itemSelected === null){
             setAddPriceOrder("");
             setCount(0);
