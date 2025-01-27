@@ -10,6 +10,7 @@ const ListItem = ({ listProps, handleClickSelectItem }: listItemProps) => {
     const [isItemVisible, setItemVisible] = useState<boolean>(true);
     const orders = useSelector((state: RootState) => state.order.orders);
     const MINIMUM_VALUE = 0;
+    console.log('List-item', listProps)
 
     const checkIfItemHasOrder = (id: number, name: string) => {
         const value = orders.filter(order => order.id === id && order);

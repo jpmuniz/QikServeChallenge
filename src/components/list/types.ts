@@ -28,21 +28,21 @@ type item = {
 
 type listProps = {
     handleClickSelectItem: (item: item)=> void;
-    listProps : {
+    name: string,
+    items : {
         name: string,
         items : {
-            id: number,
-            name: string,
-            description: string,
-            alcoholic: number,
-            price: number,
-            position: number,
-            visible: number,
-            availabilityType: AvailabilityType,
-            sku: string,
-            images? :[
-                image
-            ],
+            id: number;
+            name: string;
+            description: string;
+            alcoholic: number;
+            price: number;
+            position: number;
+            visible: number;
+            availabilityType: AvailabilityType; 
+            sku: string;
+            images?: image[];
+            available: boolean;
             modifiers?: [
                 {
                     id: number,
@@ -62,11 +62,10 @@ type listProps = {
                           available: boolean
                        }
                     ]
-                 }
-              ],
-            available: boolean
-        }[] | undefined
-    }
+                }
+            ]
+        }[]
+    }[] | undefined
 }
 
 export type { listProps, item }

@@ -1,14 +1,14 @@
 
 import { ListItem } from '../listItem/index';
-import { listProps, item } from './types';
+import { listProps } from './types';
 import { Container } from './style';
 
-const List = ({ listProps, handleClickSelectItem }: listProps) => {
-    console.log("listProps", listProps);
+const List = ({ items, handleClickSelectItem }: listProps) => {
+    
     return (
         <Container>
-            {listProps?.map((items :item)=>(
-                <ListItem key={items?.id} listProps={items} handleClickSelectItem={handleClickSelectItem}/>
+            {items?.map(item =>(
+                <ListItem key={item?.name} listProps={item} handleClickSelectItem={handleClickSelectItem}/>
             ))}
         </Container>
     )

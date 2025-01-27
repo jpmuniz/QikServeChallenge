@@ -4,7 +4,6 @@ import { Header } from './header/index';
 import { InputSearch } from './inputSearch/index';
 import { Carousell } from './carousell/index';
 import { List } from './list/index';
-import { ListItem } from './listItem';
 import { ItemPage } from './itemPage';
 import { Footer } from './footer';
 import { getSectionsMenuItems, getItemsMenu } from './utils';
@@ -19,7 +18,7 @@ const Index =()=> {
     const removeItemSelected =()=> {
         setItemSelected(null);
     }
-    console.log("menu", menu);
+    console.log("menu", itemsMenu);
     return (
         <>
             {!itemSelected ? 
@@ -27,7 +26,7 @@ const Index =()=> {
                 <Header />
                 <InputSearch />
                 <Carousell sectionsMenu={sectionsMenu} />
-                <List listProps={itemsMenu} handleClickSelectItem={handleClick}/>
+                <List items={itemsMenu} handleClickSelectItem={handleClick}/>
                 <Footer />   
             </>         
             :
