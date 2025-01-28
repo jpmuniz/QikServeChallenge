@@ -26,6 +26,7 @@ const Item = styled.div<{$isVisible: boolean}>`
 const Description = styled.div`
     display: flex;
     flex-direction: column;
+    max-width: 191px;
     h6 {
         font-size: 16px;
         color: #464646;

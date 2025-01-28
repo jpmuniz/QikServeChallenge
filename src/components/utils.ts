@@ -1,5 +1,6 @@
 import { menu } from '../menu/types';
 import { itemSelectedProps } from './itemPage/types';
+import { orderType } from '../order/types';
 
 const getSectionsMenuItems = (menu: menu | null) => (
       menu?.sections.map(section => (
@@ -31,6 +32,11 @@ const formatPrice = (value: number, locale: string = "pt-BR", currency: string =
     }).format(value);
 };
 
+const sumAmountOrders = ( orders : orderType[]) => {
+    const totalValue = orders?.reduce((accumulator, currentValue) => accumulator + currentValue?.amount, 0);
+    return totalValue;
+}
+
 const fomartArrayItemsModifiers = (modifiers: itemSelectedProps[]) => (
     modifiers.map(data => (
         {
@@ -47,4 +53,10 @@ const fomartArrayItemsModifiers = (modifiers: itemSelectedProps[]) => (
     ))
 );
 
-export { getSectionsMenuItems, getItemsMenu, applyEllipsis, formatPrice, fomartArrayItemsModifiers }
+export { getSectionsMenuItems, 
+        getItemsMenu, 
+        applyEllipsis, 
+        formatPrice, 
+        fomartArrayItemsModifiers,
+        sumAmountOrders
+    }

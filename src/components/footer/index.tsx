@@ -1,13 +1,16 @@
+import { Button } from '../button/index';
+import { footerProps } from './types';
+import { Container, ButtonContainer } from './style';
 
-import { Container } from './style';
-import { Button } from '../button/index'
 
-const Footer = ()=> {
-    <>Footer</>
+const Footer = ({ amount }: footerProps) => {
+    const HAS_AMOUNT = !!amount;
     return (
         <Container>
             <a href='#'>View allergy information</a>
-            <Button text='Your basket'/>
+            <ButtonContainer>
+                {HAS_AMOUNT && <Button text={`Your basket ${amount}`}/>}
+            </ButtonContainer>
         </Container>
     )
 }
